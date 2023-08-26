@@ -5,8 +5,8 @@ build/
 !**/src/test/**/build/
 
 ### IntelliJ IDEA ###
-.idea
-.gradle/wrapper
+/.idea
+/.gradle
 
 
 ### Eclipse ###
