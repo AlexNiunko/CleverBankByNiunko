@@ -7,6 +7,7 @@ build/
 ### IntelliJ IDEA ###
 /.idea
 /.gradle
+/gradle
 
 
 ### Eclipse ###
