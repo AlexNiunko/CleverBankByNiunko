@@ -1,5 +1,6 @@
 package com.example.cleverbankbyniunko.pool;
 
+import com.example.cleverbankbyniunko.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

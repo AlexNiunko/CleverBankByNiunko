@@ -1,5 +1,6 @@
 package com.example.cleverbankbyniunko.pool;
 
+import com.example.cleverbankbyniunko.command.Router;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,6 +22,7 @@ public class ProxyConnection implements Connection {
         } catch (SQLException e) {
             logger.warn("failed to close connection {}",e.getMessage());
         }
+
     }
 
     @Override
