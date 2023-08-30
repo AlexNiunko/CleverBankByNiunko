@@ -14,6 +14,8 @@ public enum CommandType {
     LOGOUT(new LogoutCommand()),
     SHOW_ACCOUNTS(new ShowAccountsCommand()),
     DEFAULT(new DefaultCommand()),
+    BACK_TO_USERS_ACCOUNTS_PAGE(new BackToPageUserAccountsCommand()),
+    BACK_TO_USER_PAGE(new BackToUserPageCommand()),
     CHOSE_ACCOUNT(new ChoseAccountCommand());
     private static final Logger logger = LogManager.getLogger();
 
