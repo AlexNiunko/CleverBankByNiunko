@@ -16,6 +16,10 @@ public class AttributeName {
     public static final String AMOUNT="amount";
     public static final String ID_CURRENCY="id_currency";
     public static final String OPENING_DATE="opening_date";
+    public static final String ACCOUNT_LIST="account_list";
+    public static final String MESSAGE_USER_PAGE="message_user_page";
+
+
 
 
 

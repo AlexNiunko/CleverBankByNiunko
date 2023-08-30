@@ -1,8 +1,6 @@
 package com.example.cleverbankbyniunko.command;
 
-import com.example.cleverbankbyniunko.command.impl.DefaultCommand;
-import com.example.cleverbankbyniunko.command.impl.LoginCommand;
-import com.example.cleverbankbyniunko.command.impl.LogoutCommand;
+import com.example.cleverbankbyniunko.command.impl.*;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +12,9 @@ public enum CommandType {
 
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
-    DEFAULT(new DefaultCommand());
+    SHOW_ACCOUNTS(new ShowAccountsCommand()),
+    DEFAULT(new DefaultCommand()),
+    CHOSE_ACCOUNT(new ChoseAccountCommand());
     private static final Logger logger = LogManager.getLogger();
 
     @Getter

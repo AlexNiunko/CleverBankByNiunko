@@ -1,17 +1,37 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 27.08.2023
-  Time: 15:23
+  Date: 29.08.2023
+  Time: 0:37
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title></title>
-</head>
-<jsp:forward page="/controller?command=show_accounts"/>
 <body>
+<H1> Welcome ${user.name} ${user.surname}</H1>
+<br/> ${message_user_page}
+<table>
+        <tr>
+       <td> <form action="${pageContext.request.contextPath}/controller" method="post">
+                <input type="hidden"  name="command" value="show_accounts"/>
+                <input type="submit"  name="push" value="show_accounts" />
+        </form>
+                </td>
+        <td>
+        <form action="${pageContext.request.contextPath}/controller" method="post">
+                <input type="hidden" name="command" value="create_account"/>
+                <input type="submit"  name="push" value="create_account" />
+        </form>
+        </td>
+                <td>
+        <form action="${pageContext.request.contextPath}/controller" method="post">
+                <input type="hidden" name="command" value="logout"/>
+                <input type="submit"  name="push" value="logout" />
+        </form>
+                </td>
+
+        </tr>
+</table>
+
 </body>
 </html>

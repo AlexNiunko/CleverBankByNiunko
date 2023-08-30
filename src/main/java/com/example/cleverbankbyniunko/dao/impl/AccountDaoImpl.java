@@ -9,10 +9,7 @@ import com.example.cleverbankbyniunko.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +18,8 @@ import java.util.Optional;
 public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
 
     private static final Logger logger = LogManager.getLogger();
-    public static final String SELECT_ACCOUNTS_BY_USERID="SELECT id_account,account_number,account_bank_id,amount,id_currency,opening_date from clever_bank.users WHERE id_owner = ?";
+    public static final String SELECT_ACCOUNTS_BY_USERID="SELECT id_account,account_number,id_owner,account_bank_id,amount,id_currency,opening_date from clever_bank.accounts WHERE id_owner = ?";
+    public static final String SELECT_ACCOUNT_BY_ACCOUNT_ID="SELECT account_number,id_owner,account_bank_id,amount,id_currency,opening_date from clever_bank.accounts WHERE id_account = ?";
     private static AccountDaoImpl instance=new AccountDaoImpl();
 
     public static AccountDaoImpl getInstance() {
@@ -51,6 +49,34 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
     }
 
     @Override
+    public Optional<Account> selectAccountById(long id) throws DaoException {
+        Optional<Account>optionalAccount;
+        try(Connection connection=ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement= connection.prepareStatement(SELECT_ACCOUNT_BY_ACCOUNT_ID)){
+            statement.setInt(1,(int)id);
+            try(ResultSet resultSet= statement.executeQuery()){
+                if (resultSet.next()){
+                    Account account=new Account();
+                    account.setId(id);
+                    account.setAccountNumber(resultSet.getString(AttributeName.ACCOUNT_NUMBER));
+                    account.setIdOwner(resultSet.getInt(AttributeName.ID_OWNER));
+                    account.setBank(resultSet.getInt(AttributeName.ACCOUNT_BANK_ID));
+                    account.setAmount(resultSet.getDouble(AttributeName.AMOUNT));
+                    account.setCurrency(resultSet.getInt(AttributeName.ID_CURRENCY));
+                    account.setOpeningDate(resultSet.getString(AttributeName.OPENING_DATE));
+                    optionalAccount=Optional.of(account);
+                } else {
+                    optionalAccount=Optional.empty();
+                }
+            }
+        }catch (SQLException e){
+            logger.warn("Failed to select account from DB");
+            throw new DaoException(e);
+        }
+        return optionalAccount;
+    }
+
+    @Override
     public Optional<List<Account>> findAccountsByUserId(long userId) throws DaoException {
         Optional<List<Account>>optionalAccounts;
         List<Account>accounts=new ArrayList<>();
@@ -60,9 +86,9 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
             try(ResultSet resultSet= statement.executeQuery()) {
                 while (resultSet.next()){
                     Account account=new Account();
-                    account.setId(resultSet.getInt(AttributeName.ID_ACCOUNT));
+                    account.setId(Integer.parseInt(resultSet.getString(AttributeName.ID_ACCOUNT)));
                     account.setAccountNumber(resultSet.getString(AttributeName.ACCOUNT_NUMBER));
-                    account.setIdOwner(resultSet.getInt(AttributeName.ID_OWNER));
+                    account.setIdOwner(Integer.parseInt(resultSet.getString(AttributeName.ID_OWNER)));
                     account.setBank(resultSet.getInt(AttributeName.ACCOUNT_BANK_ID));
                     account.setAmount(resultSet.getDouble(AttributeName.AMOUNT));
                     account.setCurrency(resultSet.getInt(AttributeName.ID_CURRENCY));
@@ -72,6 +98,7 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
             }
         } catch (SQLException e){
             logger.warn("Failed to select accounts by ID user");
+
             throw new DaoException(e);
         }
         if (accounts.size()==0){

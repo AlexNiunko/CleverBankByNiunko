@@ -8,6 +8,8 @@ import com.example.cleverbankbyniunko.service.AccountService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,18 +25,38 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Optional<Account> selectAccountById(long id) throws ServiceException {
+        Optional<Account>optionalAccount;
+        AccountDaoImpl accountDao=AccountDaoImpl.getInstance();
+        try{
+           optionalAccount=accountDao.selectAccountById(id);
+        }catch (DaoException e){
+            logger.warn("Faled to select account in Service");
+            throw new ServiceException(e);
+        }
+        logger.warn(optionalAccount.get());
+        return optionalAccount;
+    }
+
+    @Override
     public boolean findAllAccountsByUserID(long id, List<Account> accounts) throws ServiceException {
         boolean match = false;
         Optional<List<Account>> optionalAccounts;
+        List<Account>accountList = new ArrayList<>();
         AccountDaoImpl accountDao = AccountDaoImpl.getInstance();
         try {
             optionalAccounts = accountDao.findAccountsByUserId(id);
             match = optionalAccounts.isPresent();
             if (match) {
-                accounts = optionalAccounts.get();
+                accountList = optionalAccounts.get();
             }
         } catch (DaoException e) {
             throw new ServiceException(e);
+        }
+        logger.warn("We are in Account service");
+        for (Account item:accountList) {
+            logger.warn(item.toString());
+            accounts.add(item);
         }
         return match;
     }

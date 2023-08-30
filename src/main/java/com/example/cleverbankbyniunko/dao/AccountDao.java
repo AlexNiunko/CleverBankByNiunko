@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface AccountDao {
     Optional<List<Account>> findAccountsByUserId(long userId) throws DaoException;
+    Optional<Account> selectAccountById(long id) throws DaoException;
 }

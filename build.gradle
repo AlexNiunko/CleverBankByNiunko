@@ -23,7 +23,11 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     compileOnly('jakarta.servlet:jakarta.servlet-api:5.0.0')
-
+    implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
+    compileOnly group: 'jakarta.servlet.jsp', name: 'jakarta.servlet.jsp-api', version: '3.0.0'
+    implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compileOnly group: 'javax.servlet', name: 'jsp-api', version: '2.0'
+    implementation group: 'jakarta.el', name: 'jakarta.el-api', version: '4.0.0'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.27'
@@ -31,6 +35,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
     implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+
 }
 
 test {

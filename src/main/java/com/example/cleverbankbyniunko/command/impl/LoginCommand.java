@@ -4,18 +4,19 @@ import com.example.cleverbankbyniunko.command.AttributeName;
 import com.example.cleverbankbyniunko.command.Command;
 import com.example.cleverbankbyniunko.command.PagePath;
 import com.example.cleverbankbyniunko.command.Router;
-import com.example.cleverbankbyniunko.entity.AbstractEntity;
 import com.example.cleverbankbyniunko.entity.User;
 import com.example.cleverbankbyniunko.exception.CommandException;
-import com.example.cleverbankbyniunko.exception.DaoException;
 import com.example.cleverbankbyniunko.exception.ServiceException;
 import com.example.cleverbankbyniunko.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
 public class LoginCommand implements Command {
+    private static final Logger logger = LogManager.getLogger();
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Router router=new Router();
@@ -37,6 +38,7 @@ public class LoginCommand implements Command {
                 router.setPage(page);
             }
         } catch (ServiceException e) {
+            logger.warn("Failed to login");
             throw new CommandException(e);
         }
         return router;

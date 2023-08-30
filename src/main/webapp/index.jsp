@@ -10,16 +10,18 @@
 <br/>
 
 <form action="${pageContext.request.contextPath}/controller" method="post">
-    <div >
-        <input type="text" name="email" placeholder="please write your e-mail here"><div>email</div>
-    </div>
-    <div >
-        <input type="password" name="password" placeholder="please write your password here"><div>password</div>
-    </div>
-<div>
-    <input type="hidden" name="command" value="login"/>
-    <input type="submit" class="button" name="push" value="login" />
-</div>
+        <input type="hidden" name="command" value="login"/>
+         Email:<br/>
+        <input type="text" name="email" placeholder="please write your e-mail here">
+        <br/> Password :<br/>
+        <input type="password" name="password" placeholder="please write your password here">
+         <br/>
+               ${errorLoginPassMessage}
+         <br/>
+               ${wrongAction}
+         <br/>
+               ${nullPage}
+        <input type="submit" class="button" name="push" value="login" />
 </form>
 </body>
 </html>
