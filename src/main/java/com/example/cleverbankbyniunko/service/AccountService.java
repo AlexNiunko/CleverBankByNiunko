@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AccountService {
-    boolean findAllAccountsByUserID(long id, List<Account> accounts) throws ServiceException;
-    Optional<Account> selectAccountById(long id) throws ServiceException;
+
+    Optional<Account> selectAccountById(int id) throws ServiceException;
+
+    boolean findAllAccountsByUserID(int id, List<Account> accounts) throws ServiceException;
 }

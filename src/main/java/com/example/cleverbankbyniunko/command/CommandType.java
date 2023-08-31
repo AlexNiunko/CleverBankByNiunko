@@ -13,10 +13,15 @@ public enum CommandType {
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
     SHOW_ACCOUNTS(new ShowAccountsCommand()),
-    DEFAULT(new DefaultCommand()),
+    CHOSE_ACCOUNT(new ChoseAccountCommand()),
+    REFILL_ACCOUNT(new RefillAccountCommand()),
+    GO_TO_REFILL_ACCOUNT(new GotoRefillAccountPageCommand()),
+    GO_TO_WITHDRAWALS_ACCOUNT(new GoToWithDrawalsAccountPageCommand()),
+    GO_TO_TRANSFER_ACCOUNT(new GoToTransferAccountPageCommand()),
+    BACK_TO_ACCOUNT_PAGE(new BackToAccountPage()),
     BACK_TO_USERS_ACCOUNTS_PAGE(new BackToPageUserAccountsCommand()),
     BACK_TO_USER_PAGE(new BackToUserPageCommand()),
-    CHOSE_ACCOUNT(new ChoseAccountCommand());
+    DEFAULT(new DefaultCommand());
     private static final Logger logger = LogManager.getLogger();
 
     @Getter

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public abstract class AbstractEntity {
 
-    private long id;
+    private int id;
 
     @Override
     public int hashCode() {

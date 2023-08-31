@@ -67,7 +67,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
                             .surname(resultSet.getString(AttributeName.USER_SURNAME))
                             .email(email)
                             .build();
-                    user.setId(resultSet.getLong(AttributeName.USER_ID));
+                    user.setId(resultSet.getInt(AttributeName.USER_ID));
                     optionalUser=Optional.of(user);
                 } else {
                     optionalUser=Optional.empty();

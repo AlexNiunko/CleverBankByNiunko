@@ -49,7 +49,7 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
     }
 
     @Override
-    public Optional<Account> selectAccountById(long id) throws DaoException {
+    public Optional<Account> selectAccountById(int id) throws DaoException {
         Optional<Account>optionalAccount;
         try(Connection connection=ConnectionPool.getInstance().getConnection();
             PreparedStatement statement= connection.prepareStatement(SELECT_ACCOUNT_BY_ACCOUNT_ID)){
@@ -77,7 +77,7 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
     }
 
     @Override
-    public Optional<List<Account>> findAccountsByUserId(long userId) throws DaoException {
+    public Optional<List<Account>> findAccountsByUserId(int userId) throws DaoException {
         Optional<List<Account>>optionalAccounts;
         List<Account>accounts=new ArrayList<>();
         try(Connection connection= ConnectionPool.getInstance().getConnection();

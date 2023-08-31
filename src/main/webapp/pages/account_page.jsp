@@ -22,21 +22,23 @@
 <form action="${pageContext.request.contextPath}/controller" method="post">
 <table>
   <tr>
-    <td> <input type="hidden" name="command" value="refill_account_command"/>
+    <td> <input type="hidden" name="command" value="go_to_refill_account"/>
          <input type="submit"  name="push" value="refill" />
     </td>
     <td>
-      <input type="hidden" name="command" value="withdrawals_account_command"/>
+      <input type="hidden" name="command" value="go_to_withdrawals_account"/>
       <input type="submit"  name="push" value="withdrawals" />
     </td>
     <td>
-      <input type="hidden" name="command" value="translation_account_command"/>
-      <input type="submit"  name="push" value="translation" />
+      <input type="hidden" name="command" value="go_to_transfer_account"/>
+      <input type="submit"  name="push" value="transfer" />
     </td>
     <td></td>
   </tr>
 </table>
 </form>
+</br>
+${message_user_page}
 </br>
 <table>
   <tr>

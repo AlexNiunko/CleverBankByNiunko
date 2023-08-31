@@ -23,7 +23,7 @@ public class ChoseAccountCommand implements Command {
         AccountServiceImpl accountService=AccountServiceImpl.getInstance();
         Account account;
         try{
-            Optional<Account>optionalAccount=accountService.selectAccountById(Long.valueOf(idAccount));
+            Optional<Account>optionalAccount=accountService.selectAccountById(Integer.parseInt(idAccount));
             if (optionalAccount.isPresent()){
                 account=optionalAccount.get();
                 session.setAttribute(AttributeName.ACCOUNT,account);

@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +23,9 @@ public class AccountServiceImpl implements AccountService {
         return instance;
     }
 
+
     @Override
-    public Optional<Account> selectAccountById(long id) throws ServiceException {
+    public Optional<Account> selectAccountById(int id) throws ServiceException {
         Optional<Account>optionalAccount;
         AccountDaoImpl accountDao=AccountDaoImpl.getInstance();
         try{
@@ -39,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public boolean findAllAccountsByUserID(long id, List<Account> accounts) throws ServiceException {
+    public boolean findAllAccountsByUserID(int id, List<Account> accounts) throws ServiceException {
         boolean match = false;
         Optional<List<Account>> optionalAccounts;
         List<Account>accountList = new ArrayList<>();

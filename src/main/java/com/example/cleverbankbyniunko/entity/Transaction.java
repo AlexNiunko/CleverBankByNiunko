@@ -28,10 +28,10 @@ public class Transaction extends AbstractEntity {
     public Transaction() {
     }
 
-    private enum TypeTransaction {
+    public enum TypeTransaction {
         REFILL,
         WITHDRAWALS,
-        TRANSLATION,
+        TRANSFER,
         DEFAULT_TRANSACTION
     }
 
