@@ -19,6 +19,11 @@ public class AttributeName {
     public static final String ACCOUNT_LIST="account_list";
     public static final String MESSAGE_USER_PAGE="message_user_page";
     public static final String REFILL_AMOUNT="refill_amount";
+    public static final String WITHDRAWALS_AMOUNT="withdrawals_amount";
+    public static final String BENEFICIARY_ACCOUNT="beneficiary's_account";
+    public static final String TRANSFER_AMOUNT="transfer_amount";
+    public static final String ID_TRANSACTION="id_transaction";
+
 
 
 

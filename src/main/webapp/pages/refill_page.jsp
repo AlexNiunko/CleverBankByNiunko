@@ -16,7 +16,7 @@
 
  <table>
      <tr>
-         <td><input type="text" name="refill_amount" placeholder="please refill amount here"> </td>
+         <td><input type="text" name="refill_amount" placeholder="please input refill amount here"> </td>
          <td>
              <input type="hidden" name="command" value="refill_account"/>
              <input type="submit"  name="push" value="refill" />

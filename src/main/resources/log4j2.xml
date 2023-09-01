@@ -10,6 +10,10 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="${pattern_console}"/>
         </Console>
+        <File fileName="logs/log.txt" append="true">
+            <name>File</name>
+            <PatternLayout pattern="${pattern_file}"/>
+        </File>
         <RollingFile name = "FileRolling" fileName="logs/log_roll.txt" append = "true"
                      filePattern = "logs/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.txt">
             <PatternLayout pattern = "${pattern_file}"/>

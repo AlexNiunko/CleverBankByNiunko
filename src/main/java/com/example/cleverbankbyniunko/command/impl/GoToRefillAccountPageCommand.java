@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class GotoRefillAccountPageCommand implements Command {
+public class GoToRefillAccountPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
     @Override
     public Router execute(HttpServletRequest request) throws CommandException, DaoException {

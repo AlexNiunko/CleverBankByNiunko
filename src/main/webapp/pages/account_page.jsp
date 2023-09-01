@@ -19,24 +19,31 @@
     <td>Current amount: ${account.amount}</td>
   </tr>
 </table>
-<form action="${pageContext.request.contextPath}/controller" method="post">
+
 <table>
   <tr>
-    <td> <input type="hidden" name="command" value="go_to_refill_account"/>
-         <input type="submit"  name="push" value="refill" />
+    <td>
+      <form action="${pageContext.request.contextPath}/controller" method="post">
+         <input type="hidden" name="command" value="go_to_refill_account"/>
+         <input type="submit" class="button"  name="button_go_to_refill_account" value="refill" />
+      </form>
     </td>
     <td>
+      <form action="${pageContext.request.contextPath}/controller" method="post">
       <input type="hidden" name="command" value="go_to_withdrawals_account"/>
-      <input type="submit"  name="push" value="withdrawals" />
+      <input type="submit" class="button"  name="button_go_to_withdrawals_account" value="withdrawals" />
+      </form>
     </td>
     <td>
+      <form action="${pageContext.request.contextPath}/controller" method="post">
       <input type="hidden" name="command" value="go_to_transfer_account"/>
-      <input type="submit"  name="push" value="transfer" />
+      <input type="submit" class="button"  name="button_go_to_transfer_account" value="transfer" />
+      </form>
     </td>
     <td></td>
   </tr>
 </table>
-</form>
+
 </br>
 ${message_user_page}
 </br>
