@@ -21,6 +21,7 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
     public static final String SELECT_ACCOUNTS_BY_USERID="SELECT id_account,account_number,id_owner,account_bank_id,amount,id_currency,opening_date from clever_bank.accounts WHERE id_owner = ?";
     public static final String SELECT_ACCOUNT_BY_ACCOUNT_ID="SELECT account_number,id_owner,account_bank_id,amount,id_currency,opening_date from clever_bank.accounts WHERE id_account = ?";
     public static final String SELECT_ALL_ACCOUNTS="SELECT * FROM accounts";
+    public static final String INSERT_ACCOUNT="INSERT INTO clever_bank.accounts(account_number,id_owner,account_bank_id,amount,id_currency,opening_date) VALUES(?,?,?,?,?,?) ";
 
     private static AccountDaoImpl instance=new AccountDaoImpl();
 
@@ -32,7 +33,22 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
 
     @Override
     public boolean insert(Account account) throws DaoException {
-        return false;
+        boolean match=false;
+        try(Connection connection=ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement= connection.prepareStatement(INSERT_ACCOUNT)) {
+            statement.setString(1, account.getAccountNumber());
+            statement.setInt(2, (int)account.getIdOwner());
+            statement.setInt(3,account.getBank().ordinal()+1);
+            statement.setDouble(4,account.getAmount().doubleValue());
+            statement.setInt(5,account.getCurrency().ordinal()+1);
+            statement.setDate(6,Date.valueOf(account.getOpeningDate()));
+            statement.execute();
+            match=true;
+        }catch (SQLException e){
+            logger.warn("Failed to insert an account");
+            throw new DaoException(e);
+        }
+        return match;
     }
 
     @Override
@@ -126,7 +142,6 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
             }
         } catch (SQLException e){
             logger.warn("Failed to select accounts by ID user");
-
             throw new DaoException(e);
         }
         if (accounts.size()==0){

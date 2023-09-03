@@ -50,14 +50,14 @@ public class BankCheckImpl implements BankCheck {
         String date = transaction.getTransactionTime().toLocalDate().toString();
         String time = transaction.getTransactionTime().toLocalTime().toString().substring(0, 8);
         String line1 = prefixTitle + TITLE + postfixTitle;
-        String line2 = String.format("%-36s%s", CHECK.trim(), transaction.getId());
-        String line3 = String.format("%-30s%s", date, time);
-        String line4 = TYPE_TRANSACTION+getTypeTransaction(transaction.getTypeTransaction());
-        String line5 = String.format("%-27s%s", SENDERS_BANK.trim(), transaction.getSenderBank());
-        String line6 = String.format("%-27s%s", PAYEES_BANK.trim(), transaction.getPayeesBank());
-        String line7 = String.format("%-18s%s", SENDERS_ACCOUNT.trim(), transaction.getFromNumber());
-        String line8 = String.format("%-17s%s", PAYEES_ACCOUNT.trim(), transaction.getToNumber());
-        String line9 = String.format("%-34s%s", AMOUNT.trim(), transaction.getTransactionAmount());
+        String line2 = String.format("%-25s%s", CHECK.trim(), transaction.getId());
+        String line3 = String.format("%-25s%s", date, time);
+        String line4 = String.format("%-25s%s",TYPE_TRANSACTION,getTypeTransaction(transaction.getTypeTransaction()));
+        String line5 = String.format("%-25s%s", SENDERS_BANK.trim(), transaction.getSenderBank());
+        String line6 = String.format("%-25s%s", PAYEES_BANK.trim(), transaction.getPayeesBank());
+        String line7 = String.format("%-25s%s", SENDERS_ACCOUNT.trim(), transaction.getFromNumber());
+        String line8 = String.format("%-25s%s", PAYEES_ACCOUNT.trim(), transaction.getToNumber());
+        String line9 = String.format("%-25s%s", AMOUNT.trim(), transaction.getTransactionAmount());
         builder.append(line1).append("\r\n")
                 .append(line2).append("\r\n")
                 .append(line3).append("\r\n")
@@ -76,13 +76,13 @@ public class BankCheckImpl implements BankCheck {
         String result;
         switch (transaction) {
             case REFILL:
-                result = "               Пополнение";
+                result = "Пополнение";
                 break;
             case WITHDRAWALS:
-                result = "                   Снятие";
+                result = "Снятие";
                 break;
             case TRANSFER:
-                result = "                  Перевод";
+                result = "Перевод";
                 break;
             default:
                 result = "Неизвестная транзакция";

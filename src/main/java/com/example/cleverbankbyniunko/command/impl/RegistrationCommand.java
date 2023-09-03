@@ -30,12 +30,12 @@ public class RegistrationCommand implements Command {
             if (userService.registration(user)){
                 logger.info("Registration was successfully completed");
                 String page= PagePath.INDEX;
-                session.setAttribute(AttributeName.MESSAGE_USER_PAGE,PageMessages.REGISTRATION_MESSAGE_PASS);
+                session.setAttribute(AttributeName.INDEX_USER_PAGE,PageMessages.REGISTRATION_MESSAGE_PASS);
                 router.setPage(page);
                 router.setRedirect();
             } else {
                 logger.info("Registration failed");
-                session.setAttribute(AttributeName.MESSAGE_USER_PAGE, PageMessages.REGISTRATION_MESSAGE_FAIL);
+                session.setAttribute(AttributeName.INDEX_USER_PAGE, PageMessages.REGISTRATION_MESSAGE_FAIL);
                 String page=PagePath.INDEX;
                 router.setPage(page);
             }

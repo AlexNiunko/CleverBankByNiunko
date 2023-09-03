@@ -28,6 +28,11 @@ public class AttributeName {
     public static final String SURNAME_REGISTRATION="user_surname";
     public static final String EMAIL_REGISTRATION="user_email";
     public static final String PASSWORD_REGISTRATION="user_password";
+    public static final String INDEX_USER_PAGE="index_user_page";
+    public static final String BANKS="banks";
+    public static final String CURRENCIES="currencies";
+    public static final String CURRENCY="currency";
+    public static final String BANK="bank";
 
 
 

@@ -10,4 +10,5 @@ public interface UserService {
     boolean authenticate(String email, String password) throws ServiceException;
     Optional<User>findUserByEmail(String email) throws ServiceException;
 
+
 }

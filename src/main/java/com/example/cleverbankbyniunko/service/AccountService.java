@@ -13,4 +13,5 @@ public interface AccountService {
     Optional<Account> selectAccountById(int id) throws ServiceException;
 
     boolean findAllAccountsByUserID(int id, List<Account> accounts) throws ServiceException;
+    boolean insertAccount(Account account) throws ServiceException;
 }

@@ -11,5 +11,7 @@ public class PageMessages {
     public static final String TRANSFER_NOT_SUCCESSFUL_COMPLETE_MESSAGE="Account transfer wasn't successfully completed! Something went wrong";
     public static final String REGISTRATION_MESSAGE_FAIL="Registration wasn't completed! Incorrect input data";
     public static final String REGISTRATION_MESSAGE_PASS="Registration completed!Login please ";
+    public static final String CREATE_ACCOUNT_MESSAGE="New account created!";
+    public static final String FAILED_CREATE_ACCOUNT_MESSAGE="Failed to create new account";
 
 }

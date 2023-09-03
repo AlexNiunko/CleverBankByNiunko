@@ -26,14 +26,14 @@ public class Account extends AbstractEntity{
     @Getter
     private LocalDate openingDate;
 
-    public Account() {
-    }
-
     public void setBank(long idBank) {
         Optional <Bank> optionalBank= Arrays.stream(Bank.values())
                 .filter(s->(s.ordinal()+1)==idBank)
                 .findFirst();
-        this.bank = optionalBank.orElse(Bank.DEFAULT_BANK);
+        this.bank = optionalBank.orElse(Bank.BELARUSBANK);
+    }
+
+    public Account() {
     }
 
     public void setAmount(Double value) {
@@ -44,7 +44,7 @@ public class Account extends AbstractEntity{
         Optional <Currency> optionalCurrency= Arrays.stream(Currency.values())
                 .filter(s->(s.ordinal()+1)==idCurrency)
                 .findFirst();
-        this.currency = optionalCurrency.orElse(Currency.DEFAULT_CURRENCY);
+        this.currency = optionalCurrency.orElse(Currency.USD);
     }
 
     public void setOpeningDate(String openingDate) {
@@ -59,16 +59,15 @@ public class Account extends AbstractEntity{
         BELARUSBANK,
         ALFABANK,
         RAFFAISENBANK,
-        ZEPTERBANK,
-        DEFAULT_BANK;
+        ZEPTERBANK;
     }
     public enum Currency{
         BLR,
         USD,
         RUB,
-        EUR,
-        DEFAULT_CURRENCY;
+        EUR;
     }
+
 
     @Override
     public String toString() {

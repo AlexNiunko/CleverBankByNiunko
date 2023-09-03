@@ -24,6 +24,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public boolean insertAccount(Account account) throws ServiceException {
+        boolean match=false;
+        AccountDaoImpl accountDao=AccountDaoImpl.getInstance();
+        try{
+            match=accountDao.insert(account);
+        }catch (DaoException e){
+            throw new ServiceException(e);
+        }
+        return match;
+    }
+
+    @Override
     public Optional<List<Account>> selectAllAccounts() throws ServiceException {
         Optional<List<Account>>optionalAccounts;
         AccountDaoImpl accountDao=AccountDaoImpl.getInstance();

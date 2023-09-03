@@ -40,6 +40,16 @@
       <input type="submit" class="button"  name="button_go_to_transfer_account" value="transfer" />
       </form>
     </td>
+    <td>
+      <form action="${pageContext.request.contextPath}/controller" method="post">
+        <input type="hidden" name="command" value="delete_account"/>
+        <input type="submit" class="button"  name="button_delete_account" value="delete_account" />
+      </form>
+    </td>
+
+
+
+
     <td></td>
   </tr>
 </table>

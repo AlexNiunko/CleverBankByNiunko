@@ -9,4 +9,6 @@ public class PagePath {
     public static final String WITHDRAWALS_PAGE ="pages/withdrawals_page.jsp";
     public static final String TRANSFER_PAGE ="pages/transfer_page.jsp";
     public static final String REGISTRATION_PAGE ="pages/registration_page.jsp";
+    public static final String CREAT_ACCOUNT_PAGE ="pages/create_account.jsp";
+
 }

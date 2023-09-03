@@ -14,16 +14,20 @@
 <br/>
 <form action="${pageContext.request.contextPath}/controller" method="post">
              <input type="hidden" name="command" value="register_command"/>
-             Name:<input type="text" name="user_name" placeholder="input your name here">
+             Name:<input type="text" name="user_name" placeholder="input your name here"
+                         required pattern="^[A-Za-zА-ЯЁа-яё]{3,20}$"   >
          <br/>
              Surname:
-             <input type="text" name="user_surname" placeholder="input your surname here">
+             <input type="text" name="user_surname" placeholder="input your surname here"
+                    required pattern="^[A-Za-zА-ЯЁа-яё]{3,20}$">
     <br/>
              Email:
-             <input type="text" name="user_email" placeholder="input your email here">
+             <input type="text" name="user_email" placeholder="input your email here"
+                    required pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
     <br/>
              Password:
-             <input type="text" name="user_password" placeholder="input password here">
+             <input type="text" name="user_password" placeholder="input password here"
+                    required pattern="^[A-Za-zА-ЯЁа-яё\\d_!@#,\\.]{6,16}$">
     <br/>
              <input type="submit"  name="push" value="register" />
 </form>

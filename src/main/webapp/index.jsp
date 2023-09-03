@@ -13,17 +13,19 @@
         <input type="hidden" name="command" value="login"/>
          Email:
         <input type="text" name="email" placeholder="please write your e-mail here">
+    <br/>
          Password :
         <input type="password" name="password" placeholder="please write your password here">
-        <br/>
+    <br/>
         <input type="submit" class="button" name="push" value="login" />
 </form>
-<br/>
-${message_user_page}
-<br/>
 <form action="${pageContext.request.contextPath}/controller" >
     <input type="hidden" name="command" value="go_to_registration_page"/>
     <input type="submit"  name="push" value="registration" />
 </form>
+<br/>
+${index_user_page}
+<br/>
+
 </body>
 </html>
