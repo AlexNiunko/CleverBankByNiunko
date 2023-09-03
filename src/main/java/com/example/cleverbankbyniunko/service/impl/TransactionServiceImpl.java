@@ -9,8 +9,8 @@ import com.example.cleverbankbyniunko.service.TransactionService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class TransactionServiceImpl implements TransactionService {
     private static final Logger logger = LogManager.getLogger();
@@ -24,39 +24,45 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public boolean transferAccount(Double amountTransfer, Account fromAccount, Account toAccount) throws ServiceException {
+    public boolean transferAccount(Double amountTransfer, Account fromAccount, Account toAccount,String appPath) throws ServiceException {
         boolean match=false;
         Transaction transaction=new Transaction();
         TransactionDaoImpl transactionDao=TransactionDaoImpl.getInstance();
         try{
             match=transactionDao.transferAccount(amountTransfer, fromAccount, toAccount,transaction);
-        }catch (DaoException | SQLException e){
+            BankCheckImpl bankCheck=new BankCheckImpl(transaction);
+            bankCheck.writeCheck(appPath);
+        }catch (DaoException | SQLException | IOException  e){
             throw new ServiceException(e);
         }
         return match;
     }
 
     @Override
-    public boolean refillAccount(Double amountRefill,Account account) throws ServiceException {
+    public boolean refillAccount(Double amountRefill,Account account,String appPath) throws ServiceException {
         boolean match=false;
         Transaction transaction=new Transaction();
         TransactionDaoImpl transactionDao=TransactionDaoImpl.getInstance();
         try{
             match= transactionDao.refillAccount(amountRefill,account,transaction);
-        } catch (DaoException | SQLException e){
+            BankCheckImpl bankCheck=new BankCheckImpl(transaction);
+            bankCheck.writeCheck(appPath);
+        } catch (DaoException | SQLException | IOException e){
             throw new ServiceException(e);
         }
         return match;
     }
 
     @Override
-    public boolean withdrawalsAccount(Double amountRefill, Account account) throws ServiceException {
+    public boolean withdrawalsAccount(Double amountRefill, Account account,String appPath) throws ServiceException {
         boolean match=false;
         Transaction transaction=new Transaction();
         TransactionDaoImpl transactionDao=TransactionDaoImpl.getInstance();
         try{
             match= transactionDao.withdrawalsAccount(amountRefill,account,transaction);
-        } catch (DaoException | SQLException e){
+            BankCheckImpl bankCheck=new BankCheckImpl(transaction);
+            bankCheck.writeCheck(appPath);
+        } catch (DaoException | SQLException |IOException e){
             throw new ServiceException(e);
         }
         return match;

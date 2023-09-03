@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class TransactionDaoImpl implements TransactionDao {
     private static final Logger logger = LogManager.getLogger();
     public static final String SELECT_AMOUNT_CURRENT_ACCOUNT_BY_ID = "SELECT amount FROM  clever_bank.accounts WHERE id_account=?";
-    public static final String SELECT_AMOUNT_AND_ID_CURRENT_ACCOUNT_BY_NUMBER = "SELECT amount,id_account FROM  clever_bank.accounts WHERE account_number=?";
+    public static final String SELECT_AMOUNT_AND_IDBANK_ID_CURRENT_ACCOUNT_BY_NUMBER = "SELECT amount,id_account,account_bank_id FROM  clever_bank.accounts WHERE account_number=?";
     public static final String UPDATE_AMOUNT_CURRENT_ACCOUNT_BY_ID = "UPDATE clever_bank.accounts SET amount=?  WHERE id_account=?";
     public static final String UPDATE_AMOUNT_CURRENT_ACCOUNT_BY_NUMBER = "UPDATE clever_bank.accounts SET amount=?  WHERE account_number=?";
     public static final String INSERT_REFILL_OR_WITHDRAWALS_TRANSACTION = "INSERT INTO clever_bank.transactions (transaction_time,transaction_amount,id_type) VALUES(?,?,?)";
@@ -38,7 +38,7 @@ public class TransactionDaoImpl implements TransactionDao {
         boolean match = false;
         Connection connection = ConnectionPool.getInstance().getConnection();
         try (PreparedStatement fromAmount = connection.prepareStatement(SELECT_AMOUNT_CURRENT_ACCOUNT_BY_ID);
-             PreparedStatement toAmount = connection.prepareStatement(SELECT_AMOUNT_AND_ID_CURRENT_ACCOUNT_BY_NUMBER);
+             PreparedStatement toAmount = connection.prepareStatement(SELECT_AMOUNT_AND_IDBANK_ID_CURRENT_ACCOUNT_BY_NUMBER);
              PreparedStatement updateFromAmount = connection.prepareStatement(UPDATE_AMOUNT_CURRENT_ACCOUNT_BY_ID);
              PreparedStatement updateToAmount = connection.prepareStatement(UPDATE_AMOUNT_CURRENT_ACCOUNT_BY_NUMBER);
              PreparedStatement insertTransaction = connection.prepareStatement(INSERT_TRANSFER_TRANSACTION);
@@ -47,7 +47,7 @@ public class TransactionDaoImpl implements TransactionDao {
             fromAmount.setInt(1, fromAccount.getId());
             BigDecimal inputAmount = new BigDecimal(amount).setScale(2, RoundingMode.DOWN);
             BigDecimal fromBefore, toBefore, toAfter, fromAfter;
-            int idToAccount = 0, idTransaction = 0;
+            int idToAccount = 0, idTransaction = 0,idBankTo=0;
             try (ResultSet resultSet = fromAmount.executeQuery()) {
                 if (resultSet.next()) {
                     fromBefore = resultSet.getBigDecimal(AttributeName.AMOUNT);
@@ -61,6 +61,7 @@ public class TransactionDaoImpl implements TransactionDao {
                     if (resultSet.next()) {
                         toBefore = resultSet.getBigDecimal(AttributeName.AMOUNT);
                         idToAccount = resultSet.getInt(AttributeName.ID_ACCOUNT);
+                        idBankTo=resultSet.getInt(AttributeName.ACCOUNT_BANK_ID);
                         ifExistFrom = true;
                     } else toBefore = new BigDecimal(0);
                 }
@@ -97,6 +98,8 @@ public class TransactionDaoImpl implements TransactionDao {
                         transaction.setToNumber(toAccount.getAccountNumber());
                         transaction.setTransactionAmount(amount);
                         transaction.setTypeTransaction(Transaction.TypeTransaction.TRANSFER);
+                        transaction.setSenderBank(fromAccount.getBank());
+                        transaction.setPayeesBank(idBankTo);
                         logger.info(transaction);
                     }
                 }

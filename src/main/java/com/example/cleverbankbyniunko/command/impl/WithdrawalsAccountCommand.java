@@ -32,8 +32,9 @@ public class WithdrawalsAccountCommand implements Command {
         List<Account> accountList=new ArrayList<>();
         TransactionServiceImpl transactionService=TransactionServiceImpl.getInstance();
         AccountServiceImpl accountService=AccountServiceImpl.getInstance();
+        String appPath=request.getServletContext().getRealPath("");
         try{
-            if (transactionService.withdrawalsAccount(value.doubleValue(), account)){
+            if (transactionService.withdrawalsAccount(value.doubleValue(), account,appPath)){
                 optionalAccount=accountService.selectAccountById(account.getId());
                 Account newAccount;
                 if (optionalAccount.isPresent() && accountService.findAllAccountsByUserID(user.getId(),accountList)){

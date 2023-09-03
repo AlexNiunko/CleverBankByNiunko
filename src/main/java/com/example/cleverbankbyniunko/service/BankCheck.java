@@ -1,15 +1,7 @@
 package com.example.cleverbankbyniunko.service;
 
-import com.example.cleverbankbyniunko.entity.Transaction;
+import java.io.IOException;
 
-public class BankCheck {
-    private int idCheck;
-
-    private Transaction transaction;
-
-
-
-
-
-
+public interface BankCheck {
+    boolean writeCheck(String appPath) throws IOException;
 }

@@ -36,8 +36,9 @@ public class TransferAccountCommand implements Command {
         AccountServiceImpl accountService = AccountServiceImpl.getInstance();
         Optional<Account> optionalAccount;
         List<Account> accountList = new ArrayList<>();
+        String appPath=request.getServletContext().getRealPath("");
         try {
-            if (transactionService.transferAccount(value.doubleValue(), fromAccount, toAccount)) {
+            if (transactionService.transferAccount(value.doubleValue(), fromAccount, toAccount,appPath)) {
                 optionalAccount = accountService.selectAccountById(fromAccount.getId());
                 Account newAccount;
                 if (optionalAccount.isPresent() && accountService.findAllAccountsByUserID(user.getId(), accountList)) {

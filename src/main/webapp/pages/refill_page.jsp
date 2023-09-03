@@ -13,7 +13,6 @@
 <h1> ${user.name}  ${user.surname} , please input amount ${account.currency}</h1>
 </br>
 <form action="${pageContext.request.contextPath}/controller" method="post">
-
  <table>
      <tr>
          <td><input type="text" name="refill_amount" placeholder="please input refill amount here"> </td>

@@ -33,8 +33,10 @@ public class RefillAccountCommand implements Command {
         List<Account>accountList=new ArrayList<>();
         TransactionServiceImpl transactionService=TransactionServiceImpl.getInstance();
         AccountServiceImpl accountService=AccountServiceImpl.getInstance();
+        String appPath=request.getServletContext().getRealPath("");
+        logger.warn(appPath);
         try{
-            if (transactionService.refillAccount(value.doubleValue(), account)){
+            if (transactionService.refillAccount(value.doubleValue(), account,appPath)){
                 optionalAccount=accountService.selectAccountById(account.getId());
                 Account newAccount;
                 if (optionalAccount.isPresent() && accountService.findAllAccountsByUserID(user.getId(),accountList)){

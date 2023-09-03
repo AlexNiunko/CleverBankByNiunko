@@ -24,6 +24,10 @@ public class Transaction extends AbstractEntity {
     private Double transactionAmount;
     @Getter
     private TypeTransaction typeTransaction;
+    @Getter
+    private Account.Bank senderBank;
+    @Getter
+    private Account.Bank payeesBank;
 
     public Transaction() {
     }
@@ -59,6 +63,20 @@ public class Transaction extends AbstractEntity {
         minute=time.split(":")[1];
         second=time.split(":")[2];
         this.transactionTime = LocalDateTime.of(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day),Integer.parseInt(hour),Integer.parseInt(minute),Integer.parseInt(second));
+    }
+
+    public void setSenderBank(int idBank) {
+        senderBank= Account.Bank.values()[idBank-1];
+    }
+    public void setSenderBank(Account.Bank bank) {
+        senderBank=bank;
+    }
+
+    public void setPayeesBank(int idBank) {
+        payeesBank= Account.Bank.values()[idBank-1];
+    }
+    public void setPayeesBank(Account.Bank bank) {
+        payeesBank= bank;
     }
 
     @Override
