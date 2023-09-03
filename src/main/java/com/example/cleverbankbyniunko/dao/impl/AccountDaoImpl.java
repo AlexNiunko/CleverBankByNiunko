@@ -20,6 +20,8 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
     private static final Logger logger = LogManager.getLogger();
     public static final String SELECT_ACCOUNTS_BY_USERID="SELECT id_account,account_number,id_owner,account_bank_id,amount,id_currency,opening_date from clever_bank.accounts WHERE id_owner = ?";
     public static final String SELECT_ACCOUNT_BY_ACCOUNT_ID="SELECT account_number,id_owner,account_bank_id,amount,id_currency,opening_date from clever_bank.accounts WHERE id_account = ?";
+    public static final String SELECT_ALL_ACCOUNTS="SELECT * FROM accounts";
+
     private static AccountDaoImpl instance=new AccountDaoImpl();
 
     public static AccountDaoImpl getInstance() {
@@ -40,7 +42,33 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao  {
 
     @Override
     public List<Account> findAll() throws DaoException {
-        return null;
+        List<Account>accounts=new ArrayList<>();
+        Optional<Account>optionalAccount;
+        try(Connection connection=ConnectionPool.getInstance().getConnection();
+        PreparedStatement statement=connection.prepareStatement(SELECT_ALL_ACCOUNTS)){
+            try(ResultSet resultSet= statement.executeQuery()) {
+                while (resultSet.next()){
+                    Account account=new Account();
+                    account.setId(resultSet.getInt(AttributeName.ID_ACCOUNT));
+                    account.setAccountNumber(resultSet.getString(AttributeName.ACCOUNT_NUMBER));
+                    account.setIdOwner(resultSet.getInt(AttributeName.ID_OWNER));
+                    account.setBank(resultSet.getInt(AttributeName.ACCOUNT_BANK_ID));
+                    account.setAmount(resultSet.getDouble(AttributeName.AMOUNT));
+                    account.setCurrency(resultSet.getInt(AttributeName.ID_CURRENCY));
+                    account.setOpeningDate(resultSet.getString(AttributeName.OPENING_DATE));
+                    optionalAccount=Optional.ofNullable(account);
+                    if (optionalAccount.isPresent()){
+                        accounts.add(optionalAccount.get());
+                    }else {
+                        logger.warn("Failed to find a account from the DB");
+                    }
+                }
+            }
+        }catch (SQLException e){
+            logger.warn("Failed to select all accounts");
+            throw new DaoException(e);
+        }
+        return accounts;
     }
 
     @Override

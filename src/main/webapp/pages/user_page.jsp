@@ -19,8 +19,8 @@
                 </td>
         <td>
         <form action="${pageContext.request.contextPath}/controller" method="post">
-                <input type="hidden" name="command" value="create_account"/>
-                <input type="submit"  name="push" value="create_account" />
+                <input type="hidden" name="command" value="registration"/>
+                <input type="submit"  name="push" value="registration" />
         </form>
         </td>
                 <td>

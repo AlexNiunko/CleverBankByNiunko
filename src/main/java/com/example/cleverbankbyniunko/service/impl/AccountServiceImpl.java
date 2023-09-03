@@ -23,6 +23,17 @@ public class AccountServiceImpl implements AccountService {
         return instance;
     }
 
+    @Override
+    public Optional<List<Account>> selectAllAccounts() throws ServiceException {
+        Optional<List<Account>>optionalAccounts;
+        AccountDaoImpl accountDao=AccountDaoImpl.getInstance();
+        try{
+            optionalAccounts=Optional.ofNullable(accountDao.findAll());
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return optionalAccounts;
+    }
 
     @Override
     public Optional<Account> selectAccountById(int id) throws ServiceException {

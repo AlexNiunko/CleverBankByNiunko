@@ -11,4 +11,5 @@ public interface AccountDao {
     Optional<List<Account>> findAccountsByUserId(int userId) throws DaoException;
     Optional<Account> selectAccountById(int id) throws DaoException;
 
+
 }

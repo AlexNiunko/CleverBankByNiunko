@@ -23,6 +23,7 @@ public class AttributeName {
     public static final String BENEFICIARY_ACCOUNT="beneficiary's_account";
     public static final String TRANSFER_AMOUNT="transfer_amount";
     public static final String ID_TRANSACTION="id_transaction";
+    public static final String ID_ACCOUNT_OWNER="id_owner";
 
 
 
