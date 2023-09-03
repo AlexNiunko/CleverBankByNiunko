@@ -24,12 +24,24 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public boolean deleteAccount(Account account) throws ServiceException {
+        boolean match = false;
+        AccountDaoImpl accountDao = AccountDaoImpl.getInstance();
+        try {
+            match = accountDao.delete(account);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return match;
+    }
+
+    @Override
     public boolean insertAccount(Account account) throws ServiceException {
-        boolean match=false;
-        AccountDaoImpl accountDao=AccountDaoImpl.getInstance();
-        try{
-            match=accountDao.insert(account);
-        }catch (DaoException e){
+        boolean match = false;
+        AccountDaoImpl accountDao = AccountDaoImpl.getInstance();
+        try {
+            match = accountDao.insert(account);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
         return match;
@@ -37,10 +49,10 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Optional<List<Account>> selectAllAccounts() throws ServiceException {
-        Optional<List<Account>>optionalAccounts;
-        AccountDaoImpl accountDao=AccountDaoImpl.getInstance();
-        try{
-            optionalAccounts=Optional.ofNullable(accountDao.findAll());
+        Optional<List<Account>> optionalAccounts;
+        AccountDaoImpl accountDao = AccountDaoImpl.getInstance();
+        try {
+            optionalAccounts = Optional.ofNullable(accountDao.findAll());
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -49,11 +61,11 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Optional<Account> selectAccountById(int id) throws ServiceException {
-        Optional<Account>optionalAccount;
-        AccountDaoImpl accountDao=AccountDaoImpl.getInstance();
-        try{
-           optionalAccount=accountDao.selectAccountById(id);
-        }catch (DaoException e){
+        Optional<Account> optionalAccount;
+        AccountDaoImpl accountDao = AccountDaoImpl.getInstance();
+        try {
+            optionalAccount = accountDao.selectAccountById(id);
+        } catch (DaoException e) {
             logger.warn("Faled to select account in Service");
             throw new ServiceException(e);
         }
@@ -65,7 +77,7 @@ public class AccountServiceImpl implements AccountService {
     public boolean findAllAccountsByUserID(int id, List<Account> accounts) throws ServiceException {
         boolean match = false;
         Optional<List<Account>> optionalAccounts;
-        List<Account>accountList = new ArrayList<>();
+        List<Account> accountList = new ArrayList<>();
         AccountDaoImpl accountDao = AccountDaoImpl.getInstance();
         try {
             optionalAccounts = accountDao.findAccountsByUserId(id);
@@ -77,7 +89,7 @@ public class AccountServiceImpl implements AccountService {
             throw new ServiceException(e);
         }
         logger.warn("We are in Account service");
-        for (Account item:accountList) {
+        for (Account item : accountList) {
             logger.warn(item.toString());
             accounts.add(item);
         }

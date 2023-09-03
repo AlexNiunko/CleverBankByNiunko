@@ -14,4 +14,5 @@ public interface AccountService {
 
     boolean findAllAccountsByUserID(int id, List<Account> accounts) throws ServiceException;
     boolean insertAccount(Account account) throws ServiceException;
+    boolean deleteAccount(Account account) throws ServiceException;
 }

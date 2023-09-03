@@ -28,6 +28,9 @@ public class Transaction extends AbstractEntity {
     private Account.Bank senderBank;
     @Getter
     private Account.Bank payeesBank;
+    @Getter
+    @Setter
+    private String accountNumber;
 
     public Transaction() {
     }
