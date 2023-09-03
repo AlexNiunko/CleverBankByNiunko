@@ -19,6 +19,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean registration(User user) throws ServiceException {
+        boolean match=false;
+        UserDaoImpl userDao=UserDaoImpl.getInstance();
+        try{
+            match=userDao.insert(user);
+        }catch (DaoException e){
+            throw new ServiceException(e);
+        }
+        return match;
+    }
+
+    @Override
     public Optional<User> findUserByEmail(String email) throws ServiceException {
         UserDaoImpl userDao=UserDaoImpl.getInstance();
         Optional<User>optionalUser;

@@ -21,6 +21,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
     private static final Logger logger = LogManager.getLogger();
     public static final String SELECT_PASSWORD = "SELECT password from clever_bank.users WHERE email = ?";
     public static final String SELECT_USER_BY_MAIL = "SELECT user_id,name,surname from clever_bank.users WHERE email = ?";
+    public static final String INSERT_USER = "INSERT INTO clever_bank.users(name,surname,email,password) VALUES(?,?,?,?) ";
 
     private static   UserDaoImpl instance=new UserDaoImpl();
 
@@ -34,11 +35,24 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
 
     @Override
     public boolean insert(User user) throws DaoException {
-        return false;
+        boolean match=false;
+        try(Connection connection=ConnectionPool.getInstance().getConnection();
+        PreparedStatement statement= connection.prepareStatement(INSERT_USER)) {
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getSurname());
+            statement.setString(3,user.getEmail());
+            statement.setString(4,user.getPassword());
+            match=statement.executeUpdate()==1;
+        }catch (SQLException e){
+            logger.warn("Failed to insert a user");
+            throw new DaoException(e);
+        }
+        return match;
     }
 
     @Override
     public boolean delete(User user) throws DaoException {
+
         return false;
     }
 

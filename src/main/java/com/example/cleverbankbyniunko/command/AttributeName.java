@@ -24,6 +24,11 @@ public class AttributeName {
     public static final String TRANSFER_AMOUNT="transfer_amount";
     public static final String ID_TRANSACTION="id_transaction";
     public static final String ID_ACCOUNT_OWNER="id_owner";
+    public static final String NAME_REGISTRATION="user_name";
+    public static final String SURNAME_REGISTRATION="user_surname";
+    public static final String EMAIL_REGISTRATION="user_email";
+    public static final String PASSWORD_REGISTRATION="user_password";
+
 
 
 

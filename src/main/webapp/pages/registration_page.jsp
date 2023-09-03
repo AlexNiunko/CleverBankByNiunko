@@ -11,24 +11,26 @@
 <html>
 <body>
 <h1>Welcome to CleverBank, please fill registration form</h1>
-</br>
+<br/>
 <form action="${pageContext.request.contextPath}/controller" method="post">
-            Input name
-            <input type="text" name="transfer_amount" placeholder="input transfer amount here">
-            Input surname
-            <input type="text" name="beneficiary's_account" placeholder="input account number here">
-             Input email
-            <input type="text" name="beneficiary's_account" placeholder="input account number here">
-             Input password
-              <input type="text" name="beneficiary's_account" placeholder="input account number here">
-
-                <input type="hidden" name="command" value="transfer_account"/>
-                <input type="submit"  name="push" value="transfer" />
-
-
-
+             <input type="hidden" name="command" value="register_command"/>
+             Name:<input type="text" name="user_name" placeholder="input your name here">
+         <br/>
+             Surname:
+             <input type="text" name="user_surname" placeholder="input your surname here">
+    <br/>
+             Email:
+             <input type="text" name="user_email" placeholder="input your email here">
+    <br/>
+             Password:
+             <input type="text" name="user_password" placeholder="input password here">
+    <br/>
+             <input type="submit"  name="push" value="register" />
 </form>
-</br>
-${message_user_page}
+<br/>
+<form action="${pageContext.request.contextPath}/controller" >
+    <input type="hidden" name="command" value="back_to_index_page"/>
+    <input type="submit"  name="push" value="back" />
+</form>
 </body>
 </html>

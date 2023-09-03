@@ -8,4 +8,5 @@ public class PagePath {
     public static final String REFILL_PAGE ="pages/refill_page.jsp";
     public static final String WITHDRAWALS_PAGE ="pages/withdrawals_page.jsp";
     public static final String TRANSFER_PAGE ="pages/transfer_page.jsp";
+    public static final String REGISTRATION_PAGE ="pages/registration_page.jsp";
 }

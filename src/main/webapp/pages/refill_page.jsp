@@ -26,21 +26,10 @@
 </br>
 ${message_user_page}
 </br>
-<table>
-    <tr>
-        <td>
-            <form action="${pageContext.request.contextPath}/controller" method="post">
-                <input type="hidden" name="command" value="logout"/>
-                <input type="submit"  name="push" value="logout" />
-            </form>
-        </td>
-        <td>
-            <form action="${pageContext.request.contextPath}/controller" >
-                <input type="hidden" name="command" value="back_to_account_page"/>
-                <input type="submit"  name="push" value="back" />
-            </form>
-        </td>
-    </tr>
-</table>
+
+<form action="${pageContext.request.contextPath}/controller" >
+    <input type="hidden" name="command" value="back_to_index_page"/>
+    <input type="submit"  name="push" value="back" />
+</form>
 </body>
 </html>
